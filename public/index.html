@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Socket.io Auction Simulator</title>
+	<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="main.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+</head>
+<body>
+	
+	<div id="auction-container">
+		<div id="auction-window">
+			<div id = "output"></div>
+		</div>
+		<input type="text" id="bid" placeholder="bid" pattern="[0-9]+">
+		<input type="text" id="client" placeholder="client">
+
+		<button id="btnBid">Bid</button>
+		<button id="btnQuit">Quit</button>
+	</div>
+
+	<script src="./socket.io/socket.io.js" type="text/javascript" charset="utf-8" ></script>
+	<script src="auction.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
