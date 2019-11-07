@@ -5,20 +5,23 @@ let client = document.getElementById('client');
 let output = document.getElementById('output');
 let btnBid = document.getElementById('btnBid');
 let btnQuit = document.getElementById('btnQuit');
+let itemId = document.getElementById('itemid');
 
 
 socket.on('welcome', (data)=>{
-		 Swal.fire({
-              title: 'Auction begins...',
-			  imageUrl: 'https://placeholder.pics/svg/300x1500',
-			  imageHeight: 150,
-			  imageAlt: 'A tall image',
-			  text: 'Item description',
+	axios.get("/getData").then(res => {
+               console.log(res.data);
+              Swal.fire({
+              title: 'Auction for #'+ res.data.number+ '  '+res.data.name+ ' begins...',
+			  text: res.data.desc,
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
 			  //cancelButtonColor: '#d33',
 			  confirmButtonText: 'Ok!'
 			});
+          	itemId.value = res.data.number;
+            });
+
 });
 
 
@@ -31,7 +34,8 @@ socket.on('bid:receive', (bid)=>{
 btnBid.addEventListener('click', ()=>{
 	socket.emit('bid:send', {
 			quantity: bid.value.trim(),
-			client: client.value.trim()
+			client: client.value.trim(),
+			id: itemId.value
 		});
 });
 
@@ -67,7 +71,7 @@ btnQuit.addEventListener('click', ()=>{
 socket.on('auction:closed', (bid)=>{
 	 Swal.fire({
       title: 'Auction closed...',
-	  text: 'Item SOLD for '+bid.quantity+ ' to '+bid.client,
+	  text: 'SOLD for '+bid.quantity+ ' to '+bid.client,
 	  confirmButtonColor: '#3085d6',
 	  confirmButtonText: 'Ok!'
 	});

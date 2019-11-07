@@ -48,5 +48,6 @@ button{
 	padding:12px 0;
 	width: 100%;
 	border-radious: 0 0 2px 2ps;
+	cursor: pointer;
 }
 
